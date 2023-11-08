@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/admindash.css}" />-->
+    
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-5">
+        <h2>User Dashboard</h2>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/updateuser}">Update Details</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/products}">Products</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/cart}">Cart</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/logoutuser}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/orders}">Orders</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Welcome to the User Dashboard</h1>
+        <p>
+            Welcome to the dashboard of our Online Food Order platform! We're delighted to have you here, and we're ready to satisfy your cravings with a wide array of delicious options. Whether you're in the mood for a savory meal, a sweet treat, or a quick snack, we've got you covered.
+        Explore our menu, discover local favorites, and place your orders with ease. Your culinary adventure begins right here!
+        If you have any questions or need assistance, our friendly support team is just a click away. Enjoy your food journey, and bon appétit! </p>
+       <div class="d-flex justify-content-center align-items-center">
+        <img th:src="@{../images/userdash1.jpg}" alt="Ramen Image" class="img-fluid">
+    </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2023 Food Ordering System</p>
+    </footer>
+</body>
+</html>

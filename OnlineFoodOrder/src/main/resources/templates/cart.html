@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shopping Cart</title>
+<!--	<link rel="stylesheet" th:href="@{../css/cart.css}" th:rel="stylesheet" />-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand text-white" href="/user/userdash">Online food order</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active text-white"
+						aria-current="page" href="/user/userdash">Home</a></li>
+						
+						<li class="nav-item"><a class="nav-link active text-white"
+						aria-current="page" href="/user/userdash">Dashboard</a></li>
+<!-- 					<li class="nav-item"><a class="nav-link text-white" -->
+<!-- 						href="manage_books">Manage Books</a></li> -->
+<!-- 					<li class="nav-item"><a class="nav-link text-white" href="my_books">View Customers</a></li> -->
+				</ul>
+				<div>
+<!-- 					<a class="nav-link text-white" href="book_register">New Book -->
+<!-- 						Register</a> -->
+				</div>
+			</div>
+		</div>
+	</nav>
+	<form th:action="@{/user/cart}" method="post" th:object="${cart}">
+		<div class="container mt-5">
+			<h1 class="text-center">Shopping Cart</h1>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>CartId</th>
+						<th>Product</th>
+						<th>Price</th>
+<!--						<th>Quantity</th>-->
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cartItem, itemStat : ${cartItems}">
+						<td th:text="${cartItem.cartId}"></td>
+						<td th:text="${cartItem.product.name}"></td>
+						<td th:text="${cartItem.product.price}"></td>
+<!--						<td>-->
+<!--							<div class="input-group">-->
+<!--								<input type="number" class="form-control" th:value="${cartItem.quantity}"-->
+<!--									name="quantity" min="1" step="1" th:id="'quantity_' + ${itemStat.index}">-->
+<!--								<div class="input-group-append">-->
+<!--									<button type="button" class="btn btn-secondary"-->
+<!--										th:onclick="'javascript:decreaseQuantity(' + ${itemStat.index} + ');'">-</button>-->
+<!--									<button type="button" class="btn btn-secondary"-->
+<!--										th:onclick="'javascript:increaseQuantity(' + ${itemStat.index} + ');'">+</button>-->
+								
+								
+
+<!--								</div>-->
+<!--						</div>-->
+<!--						</td>-->
+						<td th:text="${cartItem.product.price * cartItem.quantity}"
+							th:id="'total_' + ${itemStat.index}"></td>
+<!--							  <td>-->
+<!--                        <form th:href="@{/user/deleteproduct/{cartId}}" method="post">-->
+<!--                            <input type="hidden" name="cartId" th:value="${cartItem.cartId}" />-->
+<!--                            <button type="submit" class="btn btn-danger">-->
+<!--                                <i class="fas fa-trash"></i> Delete-->
+<!--                            </button>-->
+<!--                        </form>-->
+<!--                    </td>-->
+
+<!--<td>-->
+<!--                     <form th:action="@{/user/removeItem/{cartId}/{productId}(cartId=${cartId}, productId=${cartItem.product.productId})}" method="post">-->
+<!--                        <button type="submit" class="btn btn-danger">Remove</button>-->
+<!--                    </form>-->
+<!--                </td>-->
+							
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="text-right">
+				
+				<div class="container my-5">
+  <h2>Total Amount: <span id="cartTotal" th:text="${totalAmount}">0.00</span></h2>
+
+  <a class="btn btn-primary" th:href="@{/user/placeOrder(totalAmount=${totalAmount})}">Place Order</a>
+</div>
+			</div>
+		</div>
+	</form>
+
+	<script>
+		
+
+
+		function increaseQuantity(index) {
+			var inputElement = document.querySelector('#quantity_' + index);
+			var newValue = parseInt(inputElement.value) + 1;
+			inputElement.value = newValue;
+			updateTotal(index);
+			calculateCartTotal();
+		}
+
+		function decreaseQuantity(index) {
+			var inputElement = document.querySelector('#quantity_' + index);
+			var newValue = parseInt(inputElement.value) - 1;
+			if (newValue >= 1) {
+				inputElement.value = newValue;
+				updateTotal(index);
+				calculateCartTotal();
+			}
+		}
+
+		function updateTotal(index) {
+			var inputElement = document.querySelector('#quantity_' + index);
+			var totalElement = document.querySelector('#total_' + index);
+			var quantity = parseInt(inputElement.value);
+			var price = parseFloat(document.querySelectorAll('td')[index * 4 + 1].textContent);
+			totalElement.textContent = (quantity * price).toFixed(2);
+		}//
+
+		function calculateCartTotal() {
+			var total = 0;
+			var totalElements = document.querySelectorAll('[id^="total_"]');
+			totalElements.forEach(function (element) {
+				total += parseFloat(element.textContent);
+			});
+			document.getElementById('cartTotal').textContent = total.toFixed(2);
+		}
+		
+
+		// Function to handle the "Place Order" button click
+		document.getElementById('placeOrderButton').addEventListener('click', function () {
+			// You can add your order placement logic here
+			alert('Order placed successfully!');
+		});
+	</script>
+
+	<!--	 Add Bootstrap JavaScript and jQuery here if needed -->
+	   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</html>

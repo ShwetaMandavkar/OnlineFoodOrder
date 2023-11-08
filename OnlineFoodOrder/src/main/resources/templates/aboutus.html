@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+<!--    <link rel="stylesheet" th:href="@{../css/aboutus.css}">-->
+
+<!--     Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>About Us</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img th:src="@{../images/about.png}" class="img-fluid" alt="About Us Image">
+            </div>
+            <div class="col-md-6">
+                <p>
+                    At Online Food Order, we're passionate about bringing the world's flavors to your doorstep.
+                    We believe that food is not just about sustenance; it's an experience, a celebration of culture, and a source of comfort.
+                    Our online food ordering platform is designed to connect you with a vast array of local restaurants and culinary artisans, allowing you to explore
+                    an extensive menu of delicious options, all from the comfort of your own home. Whether you're craving
+                    your favorite comfort food, eager to explore new cuisines, or looking for a hassle-free way to satisfy
+                    your hunger, we're here to make it happen. Our mission is to simplify the food ordering process,
+                    making it convenient and enjoyable for you. Join us in this culinary adventure,
+                    and let your taste buds travel the world, one order at a time.
+                </p>
+            </div>
+        </div>
+    </div>
+
+<!--     Include Bootstrap JavaScript and jQuery here if needed -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

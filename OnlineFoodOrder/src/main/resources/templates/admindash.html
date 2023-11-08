@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/admindash.css}" />-->
+    
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-5">
+        <h2>Admin Dashboard</h2>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/category}">Category</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/addproduct}">Add Product</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/logoutadmin}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/productlist}">All Products</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/allorders}">See All Orders</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>Manage your online food ordering system with ease through the Admin Dashboard. 
+        This intuitive platform allows you to oversee every aspect of your restaurant's online presence, 
+        from creating and updating menu items to processing and tracking orders. 
+        Provide your customers with a seamless experience, and ensure your restaurant runs smoothly and efficiently. 
+        With the power of technology at your fingertips, you can stay ahead in the world of online food ordering and deliver top-notch service to your valued patrons. 
+        Bon appétit!</p>
+         <div class="d-flex justify-content-center align-items-center">
+        <img th:src="@{../images/admindash.png}" alt="Admindash Image" class="img-fluid">
+         </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2023 Food Ordering System</p>
+    </footer>
+</body>
+</html>
